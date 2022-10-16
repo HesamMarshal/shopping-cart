@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* list-style: none; */
+
+}
+
+:root {
+    --primaryColor: #6d28d9;
+    --secondaryColor: #ede9fe;
+    --mainWhite: #fff;
+    --mainBlack: #222;
+    --mainGrey: #7c7c7c;
+    --mainRed: #db2777;
+    --bodyColor: #f6f6f6;
+
+    --mainSpacing: 0.1rem;
+    --mainTransition: all 0.3s linear;
+}
+
+body {
+    color: var(--mainBlack);
+    background-color: var(--bodyColor);
+    font-family: "Lato", sans-serif;
+    /* position: relative; */
+}
+
+.navbar {
+    background-color: var(--secondaryColor);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-center {
+    max-width: 1170px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.cart-btn i,
+.menu-icon i {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.menu-icon {
+    color: var(--primaryColor)
+}
+
+.nav-title {
+    color: var(--mainBlack);
+}
+
+.cart-btn {
+    color: var(--primaryColor);
+    position: relative;
+}
+
+.cart-items {
+    background-color: var(--mainRed);
+    color: var(--mainWhite);
+    font-size: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: -8px;
+    right: - 8px;
+
+}
