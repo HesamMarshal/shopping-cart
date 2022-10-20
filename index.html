@@ -10,17 +10,27 @@
 		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/modalStyle.css">
 	<title>Shopping Cart</title>
 </head>
 
 <body>
+	<div class="backdrop"> </div>
+	<!-- <button class="show-modal">Show Modal</button> -->
+
+	<div class="modal">
+		<h4>Title: Modal</h4>
+		<button class="btn close-modal">close</button>
+		<button class="btn close-confirm-modal">confirm</button>
+	</div>
+
 	<nav class="navbar">
 		<div class="navbar-center">
 			<span class="menu-icon">
 				<i class="fas fa-bars"></i>
 			</span>
-			<p class="nav-title">Hesam Shopping</p>
-			<span class="cart-btn">
+			<h1 class="nav-title">Hesam Shop</h1>
+			<span class="cart-btn show-modal">
 				<i class="fas fa-cart-plus"></i>
 				<span class="cart-items">0</span>
 			</span>
@@ -94,6 +104,9 @@
 
 		</div>
 	</section>
+
+
+	<script src="./js/modal.js"></script>
 </body>
 
 </html>
