@@ -15,10 +15,10 @@ body {
     z-index: 1;
 }
 
-.modal {
+.cart {
     z-index: 10;
     width: 20rem;
-    height: 200px;
+    min-height: 200px;
     background-color: #fff;
     border: 1px solid #ccc;
 
@@ -28,4 +28,23 @@ body {
     opacity: 0;
     transition: all 0.5s ease-in-out;
     transform: -100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-content {
+    width: 100%;
+}
+
+.cart-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-itemn-image {
+    width: 70px;
 }

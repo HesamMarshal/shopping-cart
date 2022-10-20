@@ -1,13 +1,9 @@
-// on show modal click
-//     Modal opacity  => 1
-//     backdrop display  => block
-
 const showModalBtn = document.querySelector(".show-modal");
 const closeBtn = document.querySelector(".close-modal");
 const closeConfirmBtn = document.querySelector(".close-confirm-modal");
 
 
-const modal = document.querySelector(".modal");
+const modal = document.querySelector(".cart");
 const backDrop = document.querySelector(".backdrop");
 
 showModalBtn.addEventListener('click', () => {
