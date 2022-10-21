@@ -1,26 +1,25 @@
-const showModalBtn = document.querySelector(".show-modal");
-const closeBtn = document.querySelector(".clear-cart");
-const closeConfirmBtn = document.querySelector(".close-confirm-modal");
-
-
-const modal = document.querySelector(".cart");
+const cartBtn = document.querySelector(".cart-btn");
+const cartModal = document.querySelector(".cart");
 const backDrop = document.querySelector(".backdrop");
+const closeModal = document.querySelector(".cart-item-confirm");
 
-showModalBtn.addEventListener('click', () => {
-    modal.style.opacity = "1";
-    // modal.style.transform = "translateY(20vh)";
-    modal.style.top = "20%";
+
+function showModalFunction() {
     backDrop.style.display = "block";
-
-});
-
-
-function closeModal() {
-    modal.style.opacity = "0";
-    // modal.style.transform = "translateY(-100vh)";
-    modal.style.top = "-100%";
-    backDrop.style.display = "none";
+    cartModal.style.opacity = "1";
+    cartModal.style.top = "20%";
 }
-closeBtn.addEventListener('click', closeModal);
-closeConfirmBtn.addEventListener('click', closeModal);
-backDrop.addEventListener('click', closeModal);
+
+function closeModalFunction() {
+
+    backDrop.style.display = "none";
+    cartModal.style.top = "-100%";
+    cartModal.style.opacity = "0";
+}
+
+// console.log("CartModal.js")
+
+
+cartBtn.addEventListener('click', showModalFunction);
+closeModal.addEventListener('click', closeModalFunction);
+backDrop.addEventListener('click', closeModalFunction);
