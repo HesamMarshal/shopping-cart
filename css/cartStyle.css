@@ -16,22 +16,30 @@ body {
 }
 
 .cart {
-    z-index: 10;
-    width: 20rem;
+    width: 30rem;
     min-height: 200px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    z-index: 10;
 
-    box-shadow: 0 20px 100px rgba(0, 0, 0, 0.06);
-    border-radius: 5px;
-    padding: 1rem;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    transform: -100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 20px 100px rgba(0, 0, 0, 0.06);
+    border-radius: 5px;
+
+    margin: 0 auto;
+    padding: 1rem;
+    position: absolute;
+    top: -100%;
+    left: 30%;
+
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    transform: -100vh;
+
 }
 
 .cart-content {

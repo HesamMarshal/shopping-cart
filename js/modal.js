@@ -1,5 +1,5 @@
 const showModalBtn = document.querySelector(".show-modal");
-const closeBtn = document.querySelector(".close-modal");
+const closeBtn = document.querySelector(".clear-cart");
 const closeConfirmBtn = document.querySelector(".close-confirm-modal");
 
 
@@ -8,7 +8,8 @@ const backDrop = document.querySelector(".backdrop");
 
 showModalBtn.addEventListener('click', () => {
     modal.style.opacity = "1";
-    modal.style.transform = "translateY(20vh)";
+    // modal.style.transform = "translateY(20vh)";
+    modal.style.top = "20%";
     backDrop.style.display = "block";
 
 });
@@ -16,7 +17,8 @@ showModalBtn.addEventListener('click', () => {
 
 function closeModal() {
     modal.style.opacity = "0";
-    modal.style.transform = "translateY(-100vh)";
+    // modal.style.transform = "translateY(-100vh)";
+    modal.style.top = "-100%";
     backDrop.style.display = "none";
 }
 closeBtn.addEventListener('click', closeModal);
