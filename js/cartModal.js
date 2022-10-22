@@ -29,12 +29,52 @@ class UI {
 		});
 		productsDOM.innerHTML = result;
 	}
+
+	getAddToCartBtn() {
+		const addToCartBtn = document.querySelectorAll(".add-to-cart");
+		// console.log(addToCartBtn);
+		const buttons = [...addToCartBtn];
+		// console.log(buttons);
+		buttons.forEach(btn => {
+			const id = btn.dataset.id;
+			// console.log(id);
+			const isInCart = cart.find(p => p.id === id);
+
+			if (isInCart) {
+				btn.innerText = 'In Cart';
+				btn.disabled = true;
+			}
+			else {
+				btn.addEventListener('click', (event) => {
+					// console.log(event.target.dataset.id);
+					event.target.innerText = "In Cart";
+					btn.disabled = true;
+					const addedProduct = Storage.getProducts(id);
+					cart = [...cart, { ...addedProduct, quantity: 1 }];
+					// TODO: Add by push???
+					Storage.saveCart(cart);
+
+				});
+			}
+
+		});
+	}
 }
 
 // Storage Managements
 class Storage {
 	static saveProducts(products) {
 		localStorage.setItem("products", JSON.stringify(products));
+	}
+
+	static getProducts(id) {
+		const _products = JSON.parse(localStorage.getItem('products'));
+		// console.log(_products);
+		// console.log(_products.find(p => p.id == id))
+		return _products.find(p => p.id == id);
+	}
+	static saveCart(cart) {
+		localStorage.setItem("cart", JSON.stringify(cart));
 	}
 }
 
@@ -59,17 +99,18 @@ function loader() {
 
 	const ui = new UI();
 	ui.displayProducts(productsData);
-
+	ui.getAddToCartBtn();
 	Storage.saveProducts(productsData);
 }
 
+// Driver 
+let cart = [];
 
 const cartBtn = document.querySelector(".cart-btn");
 const cartModal = document.querySelector(".cart");
 const backDrop = document.querySelector(".backdrop");
 const closeModal = document.querySelector(".cart-item-confirm");
 const productsDOM = document.querySelector(".products-center");
-
 
 
 // Event Listeners
