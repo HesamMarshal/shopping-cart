@@ -53,11 +53,26 @@ class UI {
 					cart = [...cart, { ...addedProduct, quantity: 1 }];
 					// TODO: Add by push???
 					Storage.saveCart(cart);
+					this.setCartValue(cart);
 
 				});
 			}
 
 		});
+	}
+
+	setCartValue(cart) {
+
+		// calculate sum of items and total prices
+		let tempCartItems = 0;
+		const totalPrice = cart.reduce((acc, curr) => {
+			tempCartItems += curr.quantity;
+			return acc + curr.quantity * curr.price;
+		}, 0);
+		// console.log(totalPrice)
+		// console.log(tempCartItems)
+		cartTotal.innerText = `total price : ${totalPrice.toFixed(2)} $`;
+		cartItems.innerText = tempCartItems;
 	}
 }
 
@@ -111,6 +126,8 @@ const cartModal = document.querySelector(".cart");
 const backDrop = document.querySelector(".backdrop");
 const closeModal = document.querySelector(".cart-item-confirm");
 const productsDOM = document.querySelector(".products-center");
+const cartTotal = document.querySelector(".cart-total");
+const cartItems = document.querySelector(".cart-items");
 
 
 // Event Listeners
