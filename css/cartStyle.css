@@ -42,6 +42,7 @@ body {
 
 }
 
+/* Cart styles */
 .cart-content {
     width: 100%;
 }
@@ -55,4 +56,33 @@ body {
 
 .cart-itemn-image {
     width: 70px;
+}
+
+.fa-chevron-circle-up {
+    color: var(--primaryColor);
+}
+
+.fa-chevron-circle-down {
+    color: var(--mainRed);
+}
+
+.fa-trash {
+    cursor: pointer;
+    color: var(--mainRed);
+
+}
+
+.cart-footer {
+    text-align: center;
+}
+
+.cart-footer span {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.clear-cart {
+    background-color: var(--mainWhite);
+    border: 1px solid var(--primaryColor);
+    margin-right: 10px;
 }
