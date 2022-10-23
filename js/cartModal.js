@@ -1,5 +1,5 @@
 import { productsData } from "./products.js";
-
+let cart = [];
 
 // Classes
 
@@ -32,13 +32,13 @@ class UI {
 
 	getAddToCartBtn() {
 		const addToCartBtn = document.querySelectorAll(".add-to-cart");
-		// console.log(addToCartBtn);
+
 		const buttons = [...addToCartBtn];
 		// console.log(buttons);
 		buttons.forEach(btn => {
 			const id = btn.dataset.id;
-			// console.log(id);
-			const isInCart = cart.find(p => p.id === id);
+
+			const isInCart = cart.find((p) => p.id === parseInt(id));
 
 			if (isInCart) {
 				btn.innerText = 'In Cart';
@@ -100,8 +100,6 @@ class UI {
 				</div>`;
 		cartContent.appendChild(div);
 	}
-
-
 	setupApp() {
 		// get cart from storage
 		cart = Storage.getCart() || [];
@@ -158,15 +156,15 @@ function loader() {
 
 	const ui = new UI();
 	ui.displayProducts(productsData);
-	ui.getAddToCartBtn();
 	ui.setupApp();
+	ui.getAddToCartBtn();
 	Storage.saveProducts(productsData);
 	// get carts from storage
 
 }
 
 // Driver 
-let cart = [];
+
 
 const cartBtn = document.querySelector(".cart-btn");
 const cartModal = document.querySelector(".cart");
