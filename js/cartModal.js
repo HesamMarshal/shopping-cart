@@ -100,6 +100,19 @@ class UI {
 				</div>`;
 		cartContent.appendChild(div);
 	}
+
+
+	setupApp() {
+		// get cart from storage
+		cart = Storage.getCart() || [];
+		// add items to cart modal
+		cart.forEach(cartItem => this.addCartItem(cartItem));
+
+		// calculate total
+		this.setCartValue(cart)
+
+
+	}
 }
 
 // Storage Managements
@@ -116,6 +129,11 @@ class Storage {
 	}
 	static saveCart(cart) {
 		localStorage.setItem("cart", JSON.stringify(cart));
+	}
+
+	static getCart() {
+		return JSON.parse(localStorage.getItem('cart'));
+
 	}
 }
 
@@ -141,7 +159,10 @@ function loader() {
 	const ui = new UI();
 	ui.displayProducts(productsData);
 	ui.getAddToCartBtn();
+	ui.setupApp();
 	Storage.saveProducts(productsData);
+	// get carts from storage
+
 }
 
 // Driver 
