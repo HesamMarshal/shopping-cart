@@ -44,19 +44,25 @@ class UI {
 				btn.innerText = 'In Cart';
 				btn.disabled = true;
 			}
-			else {
-				btn.addEventListener('click', (event) => {
-					// console.log(event.target.dataset.id);
-					event.target.innerText = "In Cart";
-					btn.disabled = true;
-					const addedProduct = Storage.getProducts(id);
-					cart = [...cart, { ...addedProduct, quantity: 1 }];
-					// TODO: Add by push???
-					Storage.saveCart(cart);
-					this.setCartValue(cart);
 
-				});
-			}
+			btn.addEventListener('click', (event) => {
+				// console.log(event.target.dataset.id);
+				event.target.innerText = "In Cart";
+				btn.disabled = true;
+
+				// 
+
+				const addedProduct = { ...Storage.getProducts(id), quantity: 1 };
+				cart = [...cart, addedProduct];
+				// TODO: Add by push???
+				Storage.saveCart(cart);
+				this.setCartValue(cart);
+
+				// add to cart storage
+				this.addCartItem(addedProduct);
+				// reload from storage
+			});
+
 
 		});
 	}
@@ -73,6 +79,26 @@ class UI {
 		// console.log(tempCartItems)
 		cartTotal.innerText = `total price : ${totalPrice.toFixed(2)} $`;
 		cartItems.innerText = tempCartItems;
+	}
+
+	addCartItem(item) {
+		const div = document.createElement('div');
+		div.classList.add("cart-item");
+		div.innerHTML = `
+		    	<img class="cart-itemn-image" src="${item.imageUrl}" alt="">
+			    <div class="cart-item-details">
+					<h4 class="item-name">${item.title}</h4>
+					<p class="item-price">$ ${item.price}</p>
+				</div>
+				<div class="cart-item-quantity">
+					<i class="fas fa-chevron-circle-up"></i>
+					<p>${item.quantity}</p>
+					<i class="fas fa-chevron-circle-down"></i>
+				</div>
+				<div class="trash">
+					<i class="fas fa-trash"></i>
+				</div>`;
+		cartContent.appendChild(div);
 	}
 }
 
@@ -128,6 +154,7 @@ const closeModal = document.querySelector(".cart-item-confirm");
 const productsDOM = document.querySelector(".products-center");
 const cartTotal = document.querySelector(".cart-total");
 const cartItems = document.querySelector(".cart-items");
+const cartContent = document.querySelector(".cart-content");
 
 
 // Event Listeners
