@@ -102,14 +102,28 @@ class UI {
 	}
 	setupApp() {
 		// get cart from storage
-		cart = Storage.getCart() || [];
+		cart = Storage.getCart();
 		// add items to cart modal
 		cart.forEach(cartItem => this.addCartItem(cartItem));
 
 		// calculate total
 		this.setCartValue(cart)
+	}
+	cartLogic() {
+		// Clear Cart
+		clearCart.addEventListener("click", () => {
+			// console.log("Clear");
+			cart.forEach(cartItem => this.removeItem(cartItem.id));
+		});
 
+	}
+	removeItem(id) {
+		// console.log(id);
+		// cart = [];
+		cart = cart.filter(item => item.id !== id)
+		this.setCartValue(cart);
 
+		Storage.saveCart(cart);
 	}
 }
 
@@ -130,7 +144,9 @@ class Storage {
 	}
 
 	static getCart() {
-		return JSON.parse(localStorage.getItem('cart'));
+		return JSON.parse(localStorage.getItem('cart'))
+			? JSON.parse(localStorage.getItem('cart'))
+			: [];
 
 	}
 }
@@ -158,6 +174,7 @@ function loader() {
 	ui.displayProducts(productsData);
 	ui.setupApp();
 	ui.getAddToCartBtn();
+	ui.cartLogic();
 	Storage.saveProducts(productsData);
 	// get carts from storage
 
@@ -174,6 +191,7 @@ const productsDOM = document.querySelector(".products-center");
 const cartTotal = document.querySelector(".cart-total");
 const cartItems = document.querySelector(".cart-items");
 const cartContent = document.querySelector(".cart-content");
+const clearCart = document.querySelector(".clear-cart");
 
 
 // Event Listeners
