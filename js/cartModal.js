@@ -1,6 +1,6 @@
 import { productsData } from "./products.js";
 let cart = [];
-
+let buttonsDOM = [];
 // Classes
 
 class Products {
@@ -31,11 +31,11 @@ class UI {
 	}
 
 	getAddToCartBtn() {
-		const addToCartBtn = document.querySelectorAll(".add-to-cart");
+		const addToCartBtn = [...document.querySelectorAll(".add-to-cart")];
+		buttonsDOM = addToCartBtn;
 
-		const buttons = [...addToCartBtn];
 		// console.log(buttons);
-		buttons.forEach(btn => {
+		addToCartBtn.forEach(btn => {
 			const id = btn.dataset.id;
 
 			const isInCart = cart.find((p) => p.id === parseInt(id));
@@ -91,18 +91,18 @@ class UI {
 					<p class="item-price">$ ${item.price}</p>
 				</div>
 				<div class="cart-item-quantity">
-					<i class="fas fa-chevron-circle-up"></i>
+					<i class="fas fa-chevron-circle-up" data-id=${item.id}></i>
 					<p>${item.quantity}</p>
-					<i class="fas fa-chevron-circle-down"></i>
+					<i class="fas fa-chevron-circle-down" data-id=${item.id}></i>
 				</div>
 				<div class="trash">
-					<i class="fas fa-trash"></i>
+					<i class="fas fa-trash" data-id=${item.id}></i>
 				</div>`;
 		cartContent.appendChild(div);
 	}
 	setupApp() {
 		// get cart from storage
-		cart = Storage.getCart();
+		cart = Storage.getCart() || [];
 		// add items to cart modal
 		cart.forEach(cartItem => this.addCartItem(cartItem));
 
@@ -111,19 +111,36 @@ class UI {
 	}
 	cartLogic() {
 		// Clear Cart
-		clearCart.addEventListener("click", () => {
-			// console.log("Clear");
-			cart.forEach(cartItem => this.removeItem(cartItem.id));
-		});
+		clearCart.addEventListener("click", () => this.clearCart());
 
+	}
+
+	clearCart() {
+		// console.log("Clear");
+		cart.forEach(cartItem => this.removeItem(cartItem.id));
+		console.log(cartContent.children);
+		while (cartContent.children.length > 0) {
+			cartContent.removeChild(cartContent.children[0]);
+		}
+		closeModalFunction();
 	}
 	removeItem(id) {
 		// console.log(id);
 		// cart = [];
 		cart = cart.filter(item => item.id !== id)
 		this.setCartValue(cart);
-
 		Storage.saveCart(cart);
+
+		this.getSingleButton(id);
+
+	}
+
+	// TODO: Rename the function
+	getSingleButton(id) {
+		//get add to cart btns = > change text of btns
+		const btn = buttonsDOM.find(btn => btn.dataset.id == id)
+		btn.innerText = "add to cart";
+		btn.disabled = false;
 	}
 }
 
@@ -147,7 +164,6 @@ class Storage {
 		return JSON.parse(localStorage.getItem('cart'))
 			? JSON.parse(localStorage.getItem('cart'))
 			: [];
-
 	}
 }
 
