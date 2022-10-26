@@ -1,6 +1,6 @@
 <a href="https://chaptera.ir"><img src="https://chaptera.ir/wp-content/uploads/2022/03/Chaptera_colored_logo_199_32.png" width="199" height="32" align="right" /></a>
 <br />
-# A simple Shopping cart with HTML, CSS, Javascript (Not finished yet)
+# A simple Shopping cart with HTML, CSS, Javascript 
 
 
 
