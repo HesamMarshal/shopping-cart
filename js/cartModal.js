@@ -113,10 +113,9 @@ class UI {
 		// Clear Cart
 		clearCart.addEventListener("click", () => this.clearCart());
 		cartContent.addEventListener("click", (event) => {
-			console.log(event.target);
+			// console.log(event.target);
 
 			if (event.target.classList.contains('up-arrow')) {
-				console.log(event.target.dataset.id);
 
 				const incrementedItem = event.target;
 				// 1. get item from cart
@@ -130,7 +129,40 @@ class UI {
 				Storage.saveCart(cart);
 				// update UI
 				incrementedItem.nextElementSibling.innerText = addedItem.quantity;
+			}
+			else if (event.target.classList.contains('fa-trash')) {
+				// console.log(event.target.dataset.id);
+				const selectedItem = event.target;
+				// console.log(selectedItem);
+				const removedItem = cart.find(c => c.id == selectedItem.dataset.id)
+				// console.log(removedItem)
+				this.removeItem(removedItem.id);
 
+				Storage.saveCart(cart);
+				// console.log(selectedItem.parentElement)
+				cartContent.removeChild(selectedItem.parentElement.parentElement);
+				// remove from cart
+				// remove
+			}
+			else if (event.target.classList.contains('down-arrow')) {
+				const selectedItem = event.target;
+				// 1. get item from cart
+				const subbedItem = cart.find(cartItem => cartItem.id == selectedItem.dataset.id);
+				// update cart value
+				subbedItem.quantity--;
+				if (subbedItem.quantity == 0) {
+					const removedItem = cart.find(c => c.id == selectedItem.dataset.id)
+					this.removeItem(removedItem.id);
+					Storage.saveCart(cart);
+					cartContent.removeChild(selectedItem.parentElement.parentElement);
+				}
+				else {
+					this.setCartValue(cart);
+					// save cart
+					Storage.saveCart(cart);
+					// update UI
+					selectedItem.previousElementSibling.innerText = subbedItem.quantity;
+				}
 			}
 		});
 
