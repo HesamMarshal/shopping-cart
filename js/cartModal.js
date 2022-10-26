@@ -19,7 +19,7 @@ class UI {
 							<img class="product-image" src="${item.imageUrl}" alt="Product 1">
             </div>
             <div class="product-desc">
-							<p class="product-title">Product Title: ${item.title}</p>
+							<p class="product-title">${item.title}</p>
 							<p class="product-price">$ ${item.price}</p>
             </div>
             <button class="btn add-to-cart" data-id=${item.id}>
@@ -165,7 +165,6 @@ class UI {
 				}
 			}
 		});
-
 	}
 
 	clearCart() {
