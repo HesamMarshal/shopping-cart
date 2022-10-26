@@ -91,9 +91,9 @@ class UI {
 					<p class="item-price">$ ${item.price}</p>
 				</div>
 				<div class="cart-item-quantity">
-					<i class="fas fa-chevron-circle-up" data-id=${item.id}></i>
+					<i class="fas fa-chevron-circle-up up-arrow" data-id=${item.id}></i>
 					<p>${item.quantity}</p>
-					<i class="fas fa-chevron-circle-down" data-id=${item.id}></i>
+					<i class="fas fa-chevron-circle-down down-arrow" data-id=${item.id}></i>
 				</div>
 				<div class="trash">
 					<i class="fas fa-trash" data-id=${item.id}></i>
@@ -112,13 +112,34 @@ class UI {
 	cartLogic() {
 		// Clear Cart
 		clearCart.addEventListener("click", () => this.clearCart());
+		cartContent.addEventListener("click", (event) => {
+			console.log(event.target);
+
+			if (event.target.classList.contains('up-arrow')) {
+				console.log(event.target.dataset.id);
+
+				const incrementedItem = event.target;
+				// 1. get item from cart
+
+
+				const addedItem = cart.find(cartItem => cartItem.id == incrementedItem.dataset.id);
+				// update cart value
+				addedItem.quantity++;
+				this.setCartValue(cart);
+				// save cart
+				Storage.saveCart(cart);
+				// update UI
+				incrementedItem.nextElementSibling.innerText = addedItem.quantity;
+
+			}
+		});
 
 	}
 
 	clearCart() {
 		// console.log("Clear");
 		cart.forEach(cartItem => this.removeItem(cartItem.id));
-		console.log(cartContent.children);
+		// console.log(cartContent.children);
 		while (cartContent.children.length > 0) {
 			cartContent.removeChild(cartContent.children[0]);
 		}
