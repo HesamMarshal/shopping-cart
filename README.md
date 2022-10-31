@@ -42,3 +42,11 @@ You can click the Preview link to take a look at your changes.
 
 ### License
 This project is licensed under [MIT LICENSE](LICENSE).
+
+## Use JSON server:
+* install 
+    npm install -g json-server
+    
+    (needs system reboot)
+* use:
+    json-server --watch db.json
