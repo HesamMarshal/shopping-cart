@@ -39,8 +39,17 @@ const filters = {
 
 const searchInput = document.querySelector("#search");
 const productsCenter = document.querySelector(".products-center");
+const btns = document.querySelectorAll(".btn");
 
+// filter based on category
+btns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        console.log(e.target.dataset.filter);
 
+        filters.searchItems = e.target.dataset.filter;
+        renderProducts(allProductsData, filters)
+    });
+});
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
